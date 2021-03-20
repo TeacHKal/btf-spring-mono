@@ -8,26 +8,23 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "products")
-public class Product {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
-    private Long Id;
-    @Column(name = "sku")
-    private String sku;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "price")
-    private Float price;
-    @Column(name = "description")
-    private String description;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "uid")
+    private String uid;
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
 
     @CreationTimestamp
     @Column(name = "created_at", insertable = false, updatable = false)
@@ -36,6 +33,5 @@ public class Product {
     @Column(name = "updated_at", insertable = false, updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime updateAt;
+
 }
-
-
