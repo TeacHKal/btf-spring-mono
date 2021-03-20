@@ -1,7 +1,7 @@
 package com.teachkal.btf.spring.mono.controller;
 
 import com.teachkal.btf.spring.mono.model.Item;
-import com.teachkal.btf.spring.mono.repository.ItemRepository;
+import com.teachkal.btf.spring.mono.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,39 +12,38 @@ import java.util.Optional;
 @RequestMapping(path = "/items")
 public class ItemController {
 
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     @Autowired
-    public ItemController(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
     }
 
     @PostMapping(path = "")
     public @ResponseBody Item save(@RequestBody Item item){
-        return itemRepository.save(item);
+        return itemService.save(item);
     }
 
     @GetMapping(path = "")
     public @ResponseBody List<Item> findAll(){
-        return (List<Item>)itemRepository.findAll();
+        return itemService.findAll();
     }
 
     @GetMapping(path = "/{id}")
     public @ResponseBody Optional<Item> findById(@PathVariable long id){
-        return itemRepository.findById(id);
+        return itemService.findById(id);
     }
 
     @DeleteMapping(path = "/{id}")
     public @ResponseBody boolean deleteById(@PathVariable long id){
-        itemRepository.deleteById(id);
+        itemService.deleteById(id);
         return true;
     }
 
     @PutMapping(path = "/{id}")
     public @ResponseBody Item edit(@RequestBody Item item, @PathVariable long id){
-        //Item item = itemRepository.findById(id).orElseThrow(RuntimeException::new);
         item.setId(id);
-        return itemRepository.save(item);
+        return itemService.save(item);
     }
 
 }
