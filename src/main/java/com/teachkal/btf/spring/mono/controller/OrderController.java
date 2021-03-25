@@ -29,23 +29,23 @@ public class OrderController {
 
     @GetMapping
     public @ResponseBody
-    List<Order> findAll(){
+    List<Order> getOrders(){
         return orderService.getOrders();
     }
 
     @GetMapping(path = "/{id}")
     public @ResponseBody
-    Order findById(@PathVariable long id){
+    Order getOrder(@PathVariable long id){
         return orderService.getOrder(id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public @ResponseBody Order deleteById(@PathVariable long id){
+    public @ResponseBody Order deleteOrder(@PathVariable long id){
         return orderService.deleteOrder(id);
     }
 
     @PutMapping(path = "/{id}")
-    public @ResponseBody Order edit(@RequestBody Order order, @PathVariable long id){
+    public @ResponseBody Order editOrder(@RequestBody Order order, @PathVariable long id){
         return orderService.editOrder(order, id);
     }
 
