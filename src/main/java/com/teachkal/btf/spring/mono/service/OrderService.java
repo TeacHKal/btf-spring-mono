@@ -1,15 +1,13 @@
 package com.teachkal.btf.spring.mono.service;
 
 import com.teachkal.btf.spring.mono.model.Order;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface OrderService {
 
-    Order save(Order order);
-    List<Order> findAll();
-    Optional<Order> findById(Long id);
-    boolean deleteById(Long id);
-    Order update(Order order, Long id);
+    Order addOrder(Order order);
+    List<Order> getOrders();
+    Order getOrder(Long id);
+    Order editOrder(Order order, Long id);
+    Order deleteOrder(Long id);
 }
