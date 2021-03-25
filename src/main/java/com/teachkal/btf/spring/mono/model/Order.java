@@ -1,6 +1,7 @@
 package com.teachkal.btf.spring.mono.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.teachkal.btf.spring.mono.model.dto.OrderDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,14 @@ public class Order {
     @Column(name = "updated_at", insertable = false, updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime updateAt;
+
+    public static Order from(OrderDto orderDto){
+        Order order = new Order();
+        order.setId(orderDto.getId());
+        order.setUid(orderDto.getUid());
+        order.setTotalPrice(orderDto.getTotalPrice());
+
+        return order;
+    }
 
 }
