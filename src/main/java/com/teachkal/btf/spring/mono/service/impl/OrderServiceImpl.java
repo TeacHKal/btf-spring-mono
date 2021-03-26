@@ -1,15 +1,16 @@
 package com.teachkal.btf.spring.mono.service.impl;
 
 import com.teachkal.btf.spring.mono.model.Order;
+import com.teachkal.btf.spring.mono.model.exception.OrderDuplicateUidException;
 import com.teachkal.btf.spring.mono.model.exception.OrderNotFoundException;
 import com.teachkal.btf.spring.mono.repository.OrderRepository;
 import com.teachkal.btf.spring.mono.service.OrderService;
+import com.teachkal.btf.spring.mono.shared.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -23,14 +24,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addOrder(Order order) {
+        checkForDuplicateUid(order);
         return orderRepository.save(order);
+
     }
 
     @Override
     public List<Order> getOrders() {
-        return StreamSupport
-                .stream(orderRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+        return Util.iterableToList(orderRepository.findAll());
     }
 
     @Override
@@ -48,9 +49,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order editOrder(Order order, Long id) {
+        checkForDuplicateUid(order);
         Order orderToEdit = getOrder(id);
         orderToEdit.setUid(order.getUid());
         orderToEdit.setTotalPrice(order.getTotalPrice());
         return orderToEdit;
+    }
+
+    public void checkForDuplicateUid(Order order){
+        if(orderRepository.findByUid(order.getUid()).isPresent()){
+            throw new OrderDuplicateUidException(order.getUid());
+        }
     }
 }

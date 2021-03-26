@@ -22,7 +22,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "uid")
+    @Column(name = "uid", unique = true)
     private String uid;
     @Column(name = "total_price")
     private BigDecimal totalPrice;
