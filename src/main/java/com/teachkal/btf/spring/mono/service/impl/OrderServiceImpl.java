@@ -50,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order editOrder(Order order, Long id) {
         checkForDuplicateUid(order);
+
         Order orderToEdit = getOrder(id);
         orderToEdit.setUid(order.getUid());
         orderToEdit.setTotalPrice(order.getTotalPrice());
