@@ -1,7 +1,10 @@
 package com.teachkal.btf.spring.mono.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.teachkal.btf.spring.mono.config.AppSettings;
+import com.teachkal.btf.spring.mono.model.dto.OrderItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +34,9 @@ public class OrderItem {
     private Long quantity;
     @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
+    //@JsonBackReference
+    @ManyToOne
+    private Order order;
 
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
@@ -45,7 +51,14 @@ public class OrderItem {
             columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updateAt;
 
-    @ManyToOne
-    private Order order;
 
+
+    public static OrderItem from(OrderItemDto orderItemDto) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setOrderId(orderItemDto.getOrder_id());
+        orderItem.setUnitPrice(orderItemDto.getUnitPrice());
+        orderItem.setQuantity(orderItemDto.getProduct_id());
+
+        return orderItem;
+    }
 }
