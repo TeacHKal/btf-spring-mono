@@ -1,10 +1,12 @@
 package com.teachkal.btf.spring.mono.model.dto;
 
 import com.teachkal.btf.spring.mono.model.Order;
+import com.teachkal.btf.spring.mono.model.OrderItem;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Data
 public class OrderItemDto {
@@ -15,6 +17,19 @@ public class OrderItemDto {
     private Long quantity;
     private BigDecimal unitPrice;
     private LocalDateTime createdAt;
-    private Order order;
+    private PlainOrderDto plainOrderDto;
 
+    public static OrderItemDto from(OrderItem orderItem) {
+        OrderItemDto orderItemDto = new OrderItemDto();
+        orderItemDto.setId(orderItemDto.getId());
+        orderItemDto.setOrder_id(orderItem.getOrderId());
+        orderItemDto.setQuantity(orderItem.getQuantity());
+        orderItemDto.setUnitPrice(orderItem.getUnitPrice());
+        orderItemDto.setCreatedAt(orderItem.getCreatedAt());
+        if(Objects.nonNull(orderItem.getOrder())){
+            orderItemDto.setPlainOrderDto(PlainOrderDto.from(orderItem.getOrder()));
+        }
+
+        return orderItemDto;
+    }
 }
