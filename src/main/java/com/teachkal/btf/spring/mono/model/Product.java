@@ -16,13 +16,17 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "products")
+@Table(name = "products",
+        uniqueConstraints = {
+            @UniqueConstraint(name = "product_sku_unique", columnNames = "sku")
+        }
+)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long Id;
-    @Column(name = "sku", length = 50, unique = true, nullable = false)
+    @Column(name = "sku", length = 50, nullable = false)
     private String sku;
     @Column(name = "name", nullable = false)
     private String name;
