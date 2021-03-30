@@ -45,7 +45,7 @@ public class OrderItem {
             columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updateAt;
 
-   // @ManyToOne
-    //private Order order;
+    @ManyToOne
+    private Order order;
 
 }

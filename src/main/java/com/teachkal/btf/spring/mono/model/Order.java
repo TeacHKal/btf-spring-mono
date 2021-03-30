@@ -42,9 +42,11 @@ public class Order {
             columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updateAt;
 
-    //@OneToMany
-    //@JoinColumn(name = "order_id")
-    //private List<OrderItem> orderItem;
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "order_id", referencedColumnName = "id",
+            foreignKey=@ForeignKey(name = "FK__orders__order_items")
+    )
+    private List<OrderItem> orderItem;
 
     public static Order from(OrderDto orderDto){
         Order order = new Order();
