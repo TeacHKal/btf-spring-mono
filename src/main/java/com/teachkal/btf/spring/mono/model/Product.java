@@ -1,6 +1,7 @@
 package com.teachkal.btf.spring.mono.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.teachkal.btf.spring.mono.config.AppSettings;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,22 +22,25 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long Id;
-    @Column(name = "sku")
+    @Column(name = "sku", length = 50, unique = true, nullable = false)
     private String sku;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "price")
-    private Float price;
-    @Column(name = "description")
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
+    @Column(name = "description", nullable = false)
     private String description;
 
     @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Column(name = "created_at", insertable = false, updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
+    @Column(name = "created_at", insertable = false, updatable = false,
+            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+    )
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
+    @Column(name = "updated_at", insertable = false,
+            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updateAt;
 }
 

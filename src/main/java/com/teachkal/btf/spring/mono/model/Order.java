@@ -1,6 +1,7 @@
 package com.teachkal.btf.spring.mono.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.teachkal.btf.spring.mono.config.AppSettings;
 import com.teachkal.btf.spring.mono.model.dto.OrderDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,21 +22,25 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "uid", unique = true)
+    @Column(name = "uid", nullable = false)
     private String uid;
-    @Column(name = "total_price")
+    @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;
 
     @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updateAt;
+
+    //@OneToMany
+    //@JoinColumn(name = "order_id")
+    //private List<OrderItem> orderItem;
 
     public static Order from(OrderDto orderDto){
         Order order = new Order();
