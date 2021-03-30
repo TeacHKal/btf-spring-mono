@@ -41,6 +41,7 @@ public class Product {
             columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
     )
     private LocalDateTime createdAt;
+
     @UpdateTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
     @Column(name = "updated_at", insertable = false,

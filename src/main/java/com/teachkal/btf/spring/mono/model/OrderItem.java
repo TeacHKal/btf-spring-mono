@@ -5,6 +5,8 @@ import com.teachkal.btf.spring.mono.config.AppSettings;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,9 +31,19 @@ public class OrderItem {
     private Long quantity;
     @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
+
+    @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
-    @Column(name = "created_at", insertable = false, updatable = false)
+    @Column(name = "created_at", insertable = false, updatable = false,
+            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+    )
     private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
+    @Column(name = "updated_at", insertable = false,
+            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private LocalDateTime updateAt;
 
    // @ManyToOne
     //private Order order;
