@@ -35,7 +35,7 @@ public class Order {
     @JoinColumn(name = "order_id", referencedColumnName = "id",
             foreignKey=@ForeignKey(name = "FK__orders__order_items")
     )
-    private List<OrderItem> orderItem;
+    private List<OrderItem> orderItems;
 
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
