@@ -2,6 +2,7 @@ package com.teachkal.btf.spring.mono.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teachkal.btf.spring.mono.config.AppSettings;
+import com.teachkal.btf.spring.mono.model.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,7 +47,22 @@ public class Product {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
     @Column(name = "updated_at", insertable = false,
             columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
+
+    public static Product from(ProductDto productDto) {
+        Product product = new Product();
+
+        product.setId(productDto.getId());
+        product.setSku(productDto.getSku());
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        product.setCreatedAt(productDto.getCreatedAt());
+        product.setUpdatedAt(productDto.getUpdatedAt());
+
+        return product;
+
+    }
 }
 
 
