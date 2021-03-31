@@ -1,7 +1,7 @@
 package com.teachkal.btf.spring.mono.service.impl;
 
 import com.teachkal.btf.spring.mono.model.OrderItem;
-import com.teachkal.btf.spring.mono.model.exception.OrderItemNotFound;
+import com.teachkal.btf.spring.mono.model.exception.OrderItemNotFoundException;
 import com.teachkal.btf.spring.mono.repository.OrderItemRepository;
 import com.teachkal.btf.spring.mono.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class OrderItemImpl implements OrderItemService {
     @Override
     public OrderItem getOrderItem(Long id) {
         return orderItemRepository.findById(id).orElseThrow(() ->
-                new OrderItemNotFound(id));
+                new OrderItemNotFoundException(id));
     }
 
     @Override
