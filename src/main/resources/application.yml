@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+  servlet:
+    context-path: /api/mono/
+
+
+spring:
+  jpa:
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/btf_spring_mono_db
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss.SSS
+
+
+# Because no one likes that default petstore
+springdoc:
+  swagger-ui:
+    config-url: true
