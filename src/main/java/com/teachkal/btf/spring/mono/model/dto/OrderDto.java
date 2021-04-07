@@ -7,6 +7,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
@@ -25,8 +26,9 @@ public class OrderDto {
         orderDto.setTotalPrice(order.getTotalPrice());
         orderDto.setCreatedAt(order.getCreatedAt());
         orderDto.setUpdatedAt(order.getUpdatedAt());
-        orderDto.setOrderItemsDto(order.getOrderItems().stream().map(OrderItemDto::from).collect(Collectors.toList()));
-
+        if(Objects.nonNull(order.getOrderItems())) {
+            orderDto.setOrderItemsDto(order.getOrderItems().stream().map(OrderItemDto::from).collect(Collectors.toList()));
+        }
         return orderDto;
     }
 }
