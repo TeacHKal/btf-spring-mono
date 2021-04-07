@@ -4,6 +4,8 @@ server:
     include-message: always
   servlet:
     context-path: /api/mono/
+  ssl:
+    enabled: false
 
 
 spring:
@@ -12,7 +14,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
   datasource:
     username: root
@@ -27,3 +29,10 @@ spring:
 springdoc:
   swagger-ui:
     config-url: true
+
+application:
+  config:
+    jwt:
+      secretKey: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure1
+      tokenPrefix: Bearer
+      tokenExpirationAfterDays: 30
