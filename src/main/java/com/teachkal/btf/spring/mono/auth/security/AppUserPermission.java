@@ -8,8 +8,8 @@ public enum AppUserPermission {
     ORDER_WRITE("order:write"),
     ORDER_UPDATE("order:update"),
     ORDER_ITEM_READ("orderItem:read"),
-    ORDER_ITEM_WRITE("orderItem:read"),
-    ORDER_ITEM_UPDATE("orderItem:read");
+    ORDER_ITEM_WRITE("orderItem:write"),
+    ORDER_ITEM_UPDATE("orderItem:update");
 
     private final String permission;
 
