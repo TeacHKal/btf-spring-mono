@@ -1,5 +1,6 @@
 package com.teachkal.btf.spring.mono.service.impl;
 
+import com.teachkal.btf.spring.mono.auth.security.AppUserRole;
 import com.teachkal.btf.spring.mono.model.AppUser;
 import com.teachkal.btf.spring.mono.repository.AppUserRepository;
 import com.teachkal.btf.spring.mono.service.AppUserService;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static com.teachkal.btf.spring.mono.auth.security.AppUserRole.*;
 
 @Service
 public class AppUserServiceImpl implements AppUserService, UserDetailsService {
@@ -35,7 +34,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     @Override
     public AppUser addAppUser(AppUser appUser) {
-        appUser.setAppUserRole(ADMIN);
+        appUser.setAppUserRole(AppUserRole.USER_BASIC);
         appUser.setIsExpired(false);
         appUser.setIsLocked(false);
         appUser.setIsEnabled(true);

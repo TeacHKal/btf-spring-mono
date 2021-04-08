@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
+
+import static com.teachkal.btf.spring.mono.auth.security.AppUserRole.*;
 
 @Entity
 @Data
@@ -45,9 +48,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(appUserRole.name());
-        return Collections.singletonList(authority);
+        return appUserRole.getGrantedAuthorities();
     }
 
     @Override
@@ -86,7 +87,4 @@ public class AppUser implements UserDetails {
         return isEnabled;
     }
 
-    public String getEmail() {
-        return email;
-    }
 }
