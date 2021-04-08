@@ -33,6 +33,6 @@ springdoc:
 application:
   config:
     jwt:
-      secretKey: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure1
+      secretKey: thisIsTheSecretWhichWillBeRemovedFromHere
       tokenPrefix: Bearer
       tokenExpirationAfterDays: 30

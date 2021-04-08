@@ -87,6 +87,6 @@ public class AppUser implements UserDetails {
     }
 
     public String getEmail() {
-        return getUsername();
+        return email;
     }
 }

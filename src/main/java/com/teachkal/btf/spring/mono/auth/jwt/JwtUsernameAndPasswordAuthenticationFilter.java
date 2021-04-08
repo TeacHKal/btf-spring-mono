@@ -1,6 +1,7 @@
 package com.teachkal.btf.spring.mono.auth.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teachkal.btf.spring.mono.model.AppUser;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,11 +37,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                                 HttpServletResponse response) throws AuthenticationException {
 
         try {
-            UsernameAndPasswordAuthenticationRequest authenticationRequest = new ObjectMapper()
-                    .readValue(request.getInputStream(), UsernameAndPasswordAuthenticationRequest.class);
+            AppUser authenticationRequest = new ObjectMapper()
+                    .readValue(request.getInputStream(), AppUser.class);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    authenticationRequest.getUsername(),
+                    authenticationRequest.getEmail(),
                     authenticationRequest.getPassword()
             );
 

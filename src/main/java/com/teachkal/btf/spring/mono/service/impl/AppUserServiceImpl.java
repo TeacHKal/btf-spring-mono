@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +36,8 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     @Override
     public AppUser addAppUser(AppUser appUser) {
         appUser.setAppUserRole(ADMIN);
-        appUser.setIsExpired(true);
-        appUser.setIsLocked(true);
+        appUser.setIsExpired(false);
+        appUser.setIsLocked(false);
         appUser.setIsEnabled(true);
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         return appUserRepository.save(appUser);

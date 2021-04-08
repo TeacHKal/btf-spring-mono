@@ -1,9 +1,9 @@
 package com.teachkal.btf.spring.mono.auth.security;
 
-import com.teachkal.btf.spring.mono.auth.ApplicationUserService;
 import com.teachkal.btf.spring.mono.auth.jwt.JwtConfig;
 import com.teachkal.btf.spring.mono.auth.jwt.JwtTokenVerifier;
 import com.teachkal.btf.spring.mono.auth.jwt.JwtUsernameAndPasswordAuthenticationFilter;
+import com.teachkal.btf.spring.mono.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.crypto.SecretKey;
@@ -24,14 +25,14 @@ import javax.crypto.SecretKey;
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final ApplicationUserService applicationUserService;
+    private final AppUserService appUserService;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
 
     @Autowired
-    public AppSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService, JwtConfig jwtConfig, SecretKey secretKey) {
+    public AppSecurityConfig(PasswordEncoder passwordEncoder, AppUserService appUserService, JwtConfig jwtConfig, SecretKey secretKey) {
         this.passwordEncoder = passwordEncoder;
-        this.applicationUserService = applicationUserService;
+        this.appUserService = appUserService;
         this.jwtConfig = jwtConfig;
         this.secretKey = secretKey;
     }
@@ -47,7 +48,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "/login").permitAll()
-                .antMatchers("/test").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated();
 
@@ -67,7 +68,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(applicationUserService);
+        provider.setUserDetailsService((UserDetailsService) appUserService);
+        System.out.println("TTTTTTTTTTTTTTT");
         return provider;
     }
 
