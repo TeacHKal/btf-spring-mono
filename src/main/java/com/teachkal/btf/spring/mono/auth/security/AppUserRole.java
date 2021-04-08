@@ -15,8 +15,8 @@ public enum AppUserRole {
             ORDER_READ, ORDER_WRITE, ORDER_UPDATE,
             ORDER_ITEM_READ, ORDER_ITEM_WRITE, ORDER_ITEM_UPDATE
     )),
-    MODERATOR(Sets.newHashSet()),
-    USER_SUB(Sets.newHashSet()),
+    MODERATOR(Sets.newHashSet()),   //TODO need to give permissions
+    USER_SUB(Sets.newHashSet()),    //TODO need to give permissions
     USER_BASIC(Sets.newHashSet(
             ORDER_ITEM_READ,
             ORDER_READ, ORDER_WRITE
@@ -35,7 +35,8 @@ public enum AppUserRole {
 
     public Set<SimpleGrantedAuthority> getGrantedAuthorities() {
         Set<SimpleGrantedAuthority> permissions = getPermission().stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission())).collect(Collectors.toSet());
+                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                .collect(Collectors.toSet());
 
         permissions.add(new SimpleGrantedAuthority("ROLE_" +  this.name()));
 
