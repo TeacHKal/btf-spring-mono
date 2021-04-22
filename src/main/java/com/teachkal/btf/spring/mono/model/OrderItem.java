@@ -1,8 +1,6 @@
 package com.teachkal.btf.spring.mono.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.teachkal.btf.spring.mono.config.AppSettings;
 import com.teachkal.btf.spring.mono.model.dto.OrderItemDto;
 import lombok.AllArgsConstructor;

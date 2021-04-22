@@ -1,6 +1,5 @@
 package com.teachkal.btf.spring.mono.model.dto;
 
-import com.teachkal.btf.spring.mono.model.Order;
 import com.teachkal.btf.spring.mono.model.OrderItem;
 import lombok.Data;
 
