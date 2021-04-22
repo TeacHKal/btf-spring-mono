@@ -25,7 +25,6 @@ public class ProductDto {
         productDto.setPrice(product.getPrice());
         productDto.setDescription(product.getDescription());
         productDto.setCreatedAt(product.getCreatedAt());
-        productDto.setUpdatedAt(product.getUpdatedAt());
 
         return  productDto;
     }

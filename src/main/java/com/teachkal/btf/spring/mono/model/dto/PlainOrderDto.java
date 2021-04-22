@@ -21,7 +21,6 @@ public class PlainOrderDto {
         plainOrderDto.setUid(order.getUid());
         plainOrderDto.setTotalPrice(order.getTotalPrice());
         plainOrderDto.setCreateAt(order.getCreatedAt());
-        plainOrderDto.setUpdateAt(order.getUpdatedAt());
 
         return plainOrderDto;
     }

@@ -43,12 +43,6 @@ public class Product {
     )
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
-    @Column(name = "updated_at", insertable = false,
-            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updatedAt;
-
     public static Product from(ProductDto productDto) {
         Product product = new Product();
 
@@ -58,7 +52,6 @@ public class Product {
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
         product.setCreatedAt(productDto.getCreatedAt());
-        product.setUpdatedAt(productDto.getUpdatedAt());
 
         return product;
 

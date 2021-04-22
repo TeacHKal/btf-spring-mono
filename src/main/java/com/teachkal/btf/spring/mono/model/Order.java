@@ -43,12 +43,6 @@ public class Order {
     )
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AppSettings.DATE_TIME_FORMAT)
-    @Column(name = "updated_at", insertable = false,
-            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updatedAt;
-
     public static Order from(OrderDto orderDto){
         Order order = new Order();
         order.setId(orderDto.getId());

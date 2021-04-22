@@ -24,7 +24,6 @@ public class OrderDto {
         orderDto.setUid(order.getUid());
         orderDto.setTotalPrice(order.getTotalPrice());
         orderDto.setCreatedAt(order.getCreatedAt());
-        orderDto.setUpdatedAt(order.getUpdatedAt());
         if(Objects.nonNull(order.getOrderItems())) {
             orderDto.setOrderItemsDto(order.getOrderItems().stream().map(OrderItemDto::from).collect(Collectors.toList()));
         }
