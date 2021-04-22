@@ -17,20 +17,26 @@ import java.util.Collection;
 @AllArgsConstructor
 @Table(name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(name = "user_email_unique", columnNames = "email")
+                @UniqueConstraint(name = "users_email_unique", columnNames = "email")
         })
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(
+//            name = "users_sequence",
+//            sequenceName = "users_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
     @Column(name = "id", updatable = false)
-    private Long Id;
+    private Long id;
     @Column(name = "email", length = 50, nullable = false)
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", length = 50,nullable = false)
     private String lastName;
     @Column(name = "is_locked")
     private Boolean isLocked;
@@ -40,7 +46,6 @@ public class AppUser implements UserDetails {
     private Boolean isEnabled;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return appUserRole.getGrantedAuthorities();

@@ -11,15 +11,27 @@ server:
 spring:
   jpa:
     show-sql: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    # mySQL
+    # database: mysql
+    # database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+
+
 
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/btf_spring_mono_db
+    url: jdbc:postgresql://localhost:5432/btf
+    username: postgres
+    password: 1234
+
+  ## mySQl settings
+  # username: root
+  # password: root
+  # url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/btf_spring_mono_db
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss.SSS
@@ -28,7 +40,8 @@ spring:
 # Because no one likes that default petstore
 springdoc:
   swagger-ui:
-    config-url: true
+    #config-url: true
+    disable-swagger-default-url: true
 
 application:
   config:
