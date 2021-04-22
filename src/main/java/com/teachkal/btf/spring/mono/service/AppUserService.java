@@ -13,4 +13,5 @@ public interface AppUserService {
     AppUser editAppUser(AppUser appUser, Long id);
     AppUser deleteAppUser(Long id);
     AppUser findByEmail(String email);
+    boolean isEmailExist(String email);
 }

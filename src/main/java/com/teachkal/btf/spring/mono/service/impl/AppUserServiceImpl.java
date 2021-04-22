@@ -2,15 +2,20 @@ package com.teachkal.btf.spring.mono.service.impl;
 
 import com.teachkal.btf.spring.mono.auth.security.AppUserRole;
 import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.exception.UserEmailNotFoundException;
 import com.teachkal.btf.spring.mono.repository.AppUserRepository;
 import com.teachkal.btf.spring.mono.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.security.MessageDigest;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -34,6 +39,12 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     @Override
     public AppUser addAppUser(AppUser appUser) {
+        if(isEmailExist(appUser.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    MessageFormat.format("Email  already exists: {0}", appUser.getEmail())
+                    );
+        };
+
         appUser.setAppUserRole(AppUserRole.USER_BASIC);
         appUser.setIsExpired(false);
         appUser.setIsLocked(false);
@@ -80,7 +91,13 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     @Override
     public AppUser findByEmail(String email) {
         return appUserRepository.findByEmail(email).orElseThrow(() ->
-                new UsernameNotFoundException(String.format("User not found with email: %s", email)));
+                new UserEmailNotFoundException(email));
     }
+
+    @Override
+    public boolean isEmailExist(String email) {
+        return appUserRepository.findByEmail(email).isPresent();
+    }
+
 
 }
