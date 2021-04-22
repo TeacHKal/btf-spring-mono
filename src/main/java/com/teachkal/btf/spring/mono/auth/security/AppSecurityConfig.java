@@ -29,6 +29,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
 
+    String[] SWAGGER_ANT_MATCHERS = new String[]{
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
+
     @Autowired
     public AppSecurityConfig(PasswordEncoder passwordEncoder, AppUserService appUserService, JwtConfig jwtConfig, SecretKey secretKey) {
         this.passwordEncoder = passwordEncoder;
@@ -50,6 +56,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers(SWAGGER_ANT_MATCHERS).permitAll()
                 .anyRequest().authenticated();
 
         //  # Bottom commented antMatchers are there just for a reference,
