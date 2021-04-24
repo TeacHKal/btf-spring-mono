@@ -39,11 +39,18 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     @Override
     public AppUser addAppUser(AppUser appUser) {
-        if(isEmailExist(appUser.getEmail())) {
+//        if(isEmailExist(appUser.getEmail())) {
+//            throw new ResponseStatusException(HttpStatus.CONFLICT,
+//                    MessageFormat.format("Email  already exists: {0}", appUser.getEmail())
+//                    );
+//        };
+
+        boolean isEmailExist = isEmailExist(appUser.getEmail());
+        if(isEmailExist){
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     MessageFormat.format("Email  already exists: {0}", appUser.getEmail())
-                    );
-        };
+            );
+        }
 
         appUser.setAppUserRole(AppUserRole.USER_BASIC);
         appUser.setIsExpired(false);
@@ -96,7 +103,9 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
     @Override
     public boolean isEmailExist(String email) {
-        return appUserRepository.findByEmail(email).isPresent();
+
+        return appUserRepository.isEmailExist(email);
+
     }
 
 
