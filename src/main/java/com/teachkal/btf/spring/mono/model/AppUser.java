@@ -3,6 +3,7 @@ package com.teachkal.btf.spring.mono.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teachkal.btf.spring.mono.auth.security.AppUserRole;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(name = "users_email_unique", columnNames = "email")
