@@ -15,8 +15,16 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.text.MessageFormat;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @DataJpaTest
@@ -44,7 +52,7 @@ class AppUserServiceImplTest {
     }
 
     @Test
-    void addAppUser() {
+    void canAddAppUser() {
         // given
         String email = "email";
         AppUser appUser = AppUser.builder()
@@ -63,6 +71,28 @@ class AppUserServiceImplTest {
         AppUser appUserCaptured = appUserArgumentCaptor.getValue();
 
         assertThat(appUserCaptured).isEqualTo(appUser);
+
+    }
+
+    @Test
+    void addAppUserThrowsWhenEmailIsTaken() {
+        // given
+        String email = "email";
+        AppUser appUser = AppUser.builder()
+                .email(email)
+                .firstName("first name")
+                .lastName("last name")
+                .password("password")
+                .appUserRole(AppUserRole.USER_BASIC)
+                .build();
+        // when
+        // then
+        given(appUserRepository.isEmailExist(anyString())).willReturn(true);
+        assertThatThrownBy(() -> underTest.addAppUser(appUser))
+                .isInstanceOf(ResponseStatusException.class)
+                .hasMessageContaining(MessageFormat.format("Email  already exists: {0}", appUser.getEmail()));
+
+        verify(appUserRepository, never()).save(any());
 
     }
 
