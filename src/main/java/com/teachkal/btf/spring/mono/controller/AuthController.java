@@ -1,6 +1,7 @@
 package com.teachkal.btf.spring.mono.controller;
 
 import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.dto.AppUserDtoResponse;
 import com.teachkal.btf.spring.mono.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AppUser> register(@RequestBody AppUser appUser){
-        return new ResponseEntity<>(appUserService.addAppUser(appUser), HttpStatus.OK);
+    public ResponseEntity<AppUserDtoResponse> register(@RequestBody AppUser appUser){
+        AppUser user = appUserService.addAppUser(appUser);
+        AppUserDtoResponse response = AppUserDtoResponse.from(user);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
