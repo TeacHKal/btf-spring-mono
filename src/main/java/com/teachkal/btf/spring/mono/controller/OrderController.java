@@ -31,8 +31,8 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<OrderDto>> getOrders() {
         List<Order> orders = orderService.getOrders();
-        List<OrderDto> ordersDtos = orders.stream().map(OrderDto::from).collect(Collectors.toList());
-        return new ResponseEntity<>(ordersDtos, HttpStatus.OK);
+        List<OrderDto> ordersDto = orders.stream().map(OrderDto::from).collect(Collectors.toList());
+        return new ResponseEntity<>(ordersDto, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
