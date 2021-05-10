@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.service.impl;
 
-import com.teachkal.btf.spring.mono.model.Order;
+import com.teachkal.btf.spring.mono.model.entity.Order;
 import com.teachkal.btf.spring.mono.model.exception.OrderDuplicateUidException;
 import com.teachkal.btf.spring.mono.model.exception.OrderNotFoundException;
 import com.teachkal.btf.spring.mono.repository.OrderRepository;

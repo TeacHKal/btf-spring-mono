@@ -1,9 +1,8 @@
 package com.teachkal.btf.spring.mono.service;
 
-import com.teachkal.btf.spring.mono.model.Product;
+import com.teachkal.btf.spring.mono.model.entity.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
 

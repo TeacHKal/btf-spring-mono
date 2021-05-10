@@ -1,4 +1,4 @@
-package com.teachkal.btf.spring.mono.model;
+package com.teachkal.btf.spring.mono.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teachkal.btf.spring.mono.config.AppSettings;

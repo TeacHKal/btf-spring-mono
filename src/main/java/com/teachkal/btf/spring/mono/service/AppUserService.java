@@ -1,10 +1,8 @@
 package com.teachkal.btf.spring.mono.service;
 
-import com.teachkal.btf.spring.mono.model.AppUser;
-import org.springframework.stereotype.Service;
+import com.teachkal.btf.spring.mono.model.entity.AppUser;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AppUserService {
     AppUser addAppUser(AppUser appUser);

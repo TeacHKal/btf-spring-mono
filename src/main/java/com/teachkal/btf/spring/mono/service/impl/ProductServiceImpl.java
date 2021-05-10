@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.service.impl;
 
-import com.teachkal.btf.spring.mono.model.Product;
+import com.teachkal.btf.spring.mono.model.entity.Product;
 import com.teachkal.btf.spring.mono.model.exception.ProductNotFoundException;
 import com.teachkal.btf.spring.mono.repository.ProductRepository;
 import com.teachkal.btf.spring.mono.service.ProductService;

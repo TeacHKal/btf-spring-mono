@@ -1,4 +1,4 @@
-package com.teachkal.btf.spring.mono.model;
+package com.teachkal.btf.spring.mono.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teachkal.btf.spring.mono.auth.security.AppUserRole;

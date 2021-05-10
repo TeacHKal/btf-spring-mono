@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.controller;
 
-import com.teachkal.btf.spring.mono.model.OrderItem;
+import com.teachkal.btf.spring.mono.model.entity.OrderItem;
 import com.teachkal.btf.spring.mono.model.dto.OrderItemDto;
 import com.teachkal.btf.spring.mono.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;

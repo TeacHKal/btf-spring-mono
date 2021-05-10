@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.controller;
 
-import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.entity.AppUser;
 import com.teachkal.btf.spring.mono.model.dto.AppUserDtoResponse;
 import com.teachkal.btf.spring.mono.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;

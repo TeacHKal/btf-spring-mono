@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.repository;
 
-import com.teachkal.btf.spring.mono.model.Order;
+import com.teachkal.btf.spring.mono.model.entity.Order;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

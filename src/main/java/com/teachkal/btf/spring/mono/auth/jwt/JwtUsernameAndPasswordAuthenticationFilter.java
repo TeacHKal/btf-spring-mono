@@ -1,7 +1,7 @@
 package com.teachkal.btf.spring.mono.auth.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.entity.AppUser;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

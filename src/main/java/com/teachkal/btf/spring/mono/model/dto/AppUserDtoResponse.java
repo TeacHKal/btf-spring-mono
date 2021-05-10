@@ -1,7 +1,7 @@
 package com.teachkal.btf.spring.mono.model.dto;
 
 import com.teachkal.btf.spring.mono.auth.security.AppUserRole;
-import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.entity.AppUser;
 import lombok.Data;
 
 @Data

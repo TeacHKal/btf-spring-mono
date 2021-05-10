@@ -1,7 +1,7 @@
 package com.teachkal.btf.spring.mono.service.impl;
 
 import com.teachkal.btf.spring.mono.auth.security.AppUserRole;
-import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.entity.AppUser;
 import com.teachkal.btf.spring.mono.model.exception.UserEmailNotFoundException;
 import com.teachkal.btf.spring.mono.repository.AppUserRepository;
 import com.teachkal.btf.spring.mono.service.AppUserService;

@@ -1,7 +1,7 @@
 package com.teachkal.btf.spring.mono.repository;
 
 import com.teachkal.btf.spring.mono.auth.security.AppUserRole;
-import com.teachkal.btf.spring.mono.model.AppUser;
+import com.teachkal.btf.spring.mono.model.entity.AppUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

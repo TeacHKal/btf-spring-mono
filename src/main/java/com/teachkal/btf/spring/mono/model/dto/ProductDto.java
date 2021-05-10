@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.model.dto;
 
-import com.teachkal.btf.spring.mono.model.Product;
+import com.teachkal.btf.spring.mono.model.entity.Product;
 import lombok.Data;
 
 import java.math.BigDecimal;

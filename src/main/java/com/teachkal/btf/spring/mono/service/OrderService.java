@@ -1,6 +1,6 @@
 package com.teachkal.btf.spring.mono.service;
 
-import com.teachkal.btf.spring.mono.model.Order;
+import com.teachkal.btf.spring.mono.model.entity.Order;
 import java.util.List;
 
 public interface OrderService {
